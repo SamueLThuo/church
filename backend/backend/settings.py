@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-import dj_database_url # type: ignore
+import dj_database_url
 from datetime import timedelta
 from django.contrib.messages import constants as messages
 
@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-key")
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"]  # you can replace * with your domain later
 
 # Installed apps
 INSTALLED_APPS = [
@@ -42,9 +42,11 @@ MIDDLEWARE = [
 
 # CORS
 CORS_ALLOWED_ORIGINS = [
-    "https://churchbaptist.netlify.app/",  # React dev server (remove in prod if needed)
+    "http://localhost:3000",              # React dev server
+    "https://churchbaptist.netlify.app",  # ✅ no trailing slash
 ]
-CORS_ALLOW_ALL_ORIGINS = True  # ✅ allows all origins (relax in prod)
+# If you want to allow everything (not recommended):
+# CORS_ALLOW_ALL_ORIGINS = True
 
 # URLs
 ROOT_URLCONF = "backend.urls"
@@ -76,10 +78,10 @@ REST_FRAMEWORK = {
 # Custom User
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-# ✅ Database (PostgreSQL only, via Render DATABASE_URL)
+# Database (PostgreSQL only)
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
+        default=os.environ.get("DATABASE_URL"),  # ✅ only Postgres on Render
         conn_max_age=600,
         ssl_require=True,
     )
