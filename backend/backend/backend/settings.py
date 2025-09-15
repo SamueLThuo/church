@@ -42,10 +42,9 @@ MIDDLEWARE = [
 
 # CORS
 CORS_ALLOWED_ORIGINS = [
-    "https://churchbaptist.netlify.app/", #nectlify
-    "http://localhost:3000",  # React dev server
+    "http://localhost:3000"  # React dev server
 ]
-CORS_ALLOW_ALL_ORIGINS = True  # ✅ enables all (you can restrict later)
+CORS_ALLOW_ALL_ORIGINS = ["https://churchbaptist.netlify.app/",] #nectlify 
 
 # URLs
 ROOT_URLCONF = "backend.urls"
