@@ -10,7 +10,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-key")
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-ALLOWED_HOSTS = ["*"]  # you can replace * with your domain later
+ALLOWED_HOSTS = [
+    "church-97y9.onrender.com",   # Render backend URL
+    "churchbaptist.co.ke",        # Custom domain (root domain)
+    "www.churchbaptist.co.ke",    # Custom domain with www
+    "localhost",                  # Local testing
+    "127.0.0.1",                  # Local testing
+]
+ # you can replace * with your domain later
 
 # Installed apps
 INSTALLED_APPS = [
