@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-import dj_database_url
+import dj_database_url # type: ignore
 from datetime import timedelta
 from django.contrib.messages import constants as messages
 
@@ -42,9 +42,9 @@ MIDDLEWARE = [
 
 # CORS
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React dev server
+    "https://churchbaptist.netlify.app/",  # React dev server (remove in prod if needed)
 ]
-CORS_ALLOW_ALL_ORIGINS = True  # ✅ enables all (you can restrict later)
+CORS_ALLOW_ALL_ORIGINS = True  # ✅ allows all origins (relax in prod)
 
 # URLs
 ROOT_URLCONF = "backend.urls"
@@ -76,10 +76,10 @@ REST_FRAMEWORK = {
 # Custom User
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-# Database (Render uses DATABASE_URL env var)
+# ✅ Database (PostgreSQL only, via Render DATABASE_URL)
 DATABASES = {
     "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
         ssl_require=True,
     )
